@@ -16,7 +16,6 @@ Package.onUse(function (api) {
 
     api.addFiles('lib/i18nconf.js', ['client', 'server']);
     api.addFiles('lib/i18nconf_client.js', ['client']);
-    api.addFiles('lib/i18nconf_server.js', ['server']);
     api.addFiles('lib/i18nconf_init.js', ['client', 'server']);
 
     api.export('I18NConf', ['client', 'server']);
@@ -26,11 +25,12 @@ Package.onUse(function (api) {
 Package.onTest(function (api) {
 
     api.use('underscore@1.0.2', ['client', 'server']);
-    api.use('i18n-conf@0.1.0', ['client', 'server']);
+    api.use('martino:i18n-conf@0.1.0', ['client', 'server']);
 
     api.use('tinytest', ['client', 'server']);
     api.use('test-helpers', ['client', 'server']);
 
+    api.addFiles('test/common.js', ['client', 'server']);
     api.addFiles('test/i18nconf_test.js', ['client', 'server']);
 
 
