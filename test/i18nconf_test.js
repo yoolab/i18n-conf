@@ -11,18 +11,18 @@ Tinytest.add('i18n-conf - test I18NConf configuration', function (test) {
 
     i18nconf.configure({
 
-        defaultLang: 'es'
+        defaultLanguage: 'es'
 
     });
 
     // Test configured options
-    test.equal(i18nconf.options.defaultLang, 'es', 'Default language for client is not "es".');
-    test.equal(i18nconf.options.langs[0], 'it', 'First language for client is not "it".');
-    test.equal(i18nconf.options.langs[1], 'es', 'Second language for client is not "es".');
-    test.equal(i18nconf.options.langs[2], 'en', 'Third language for client is not "en".');
+    test.equal(i18nconf.options.defaultLanguage, 'es', 'Default language for client is not "es".');
+    test.equal(i18nconf.options.languages[0], 'it', 'First language for client is not "it".');
+    test.equal(i18nconf.options.languages[1], 'es', 'Second language for client is not "es".');
+    test.equal(i18nconf.options.languages[2], 'en', 'Third language for client is not "en".');
 
     // Test default options
-    test.isTrue(i18nconf.options.autoConfLang, 'Default value for autoCofLanguage option is not "true" .');
+    test.isTrue(i18nconf.options.autoConfLanguage, 'Default value for autoCofLanguage option is not "true" .');
     test.isTrue(i18nconf.options.serverSide, 'Default value for serverSide option is not "true" .');
 
 });
@@ -34,33 +34,33 @@ Tinytest.add('i18n-conf - test I18NConf language methods', function (test) {
 
     i18nconf.configure({
         // Avoid to persist language between tests!
-        persistLang: false
+        persistLanguage: false
     });
 
-    test.equal(i18nconf.getDefaultLang(), 'en', 'I18NConf default language is not "en".');
+    test.equal(i18nconf.getDefaultLanguage(), 'en', 'I18NConf default language is not "en".');
 
     i18nconf = initConf();
 
     i18nconf.configure({
 
-        defaultLang: 'es',
+        defaultLanguage: 'es',
 
-        langs: ['it', 'es', 'en'],
+        languages: ['it', 'es', 'en'],
 
         // Avoid to persist language between tests!
-        persistLang: false
+        persistLanguage: false
 
     });
 
 
-    test.equal(i18nconf.getDefaultLang(), 'es', 'I18NConf default language after changing "defaultLang" conf option is not "es".');
+    test.equal(i18nconf.getDefaultLanguage(), 'es', 'I18NConf default language after changing "defaultLang" conf option is not "es".');
 
     // Testing getLanguage
-    test.equal(i18nconf.getLang(), 'es', 'I18NConf language is not "es" when having defaultLang "es".');
+    test.equal(i18nconf.getLanguage(), 'es', 'I18NConf language is not "es" when having defaultLang "es".');
 
     //Testing language change
-    i18nconf.setLang('it');
-    test.equal(i18nconf.getLang(), 'it', 'I18NConf did not change language to "it"');
+    i18nconf.setLanguage('it');
+    test.equal(i18nconf.getLanguage(), 'it', 'I18NConf did not change language to "it"');
 
 
     // Testing custom getDefaultLang method
@@ -70,19 +70,19 @@ Tinytest.add('i18n-conf - test I18NConf language methods', function (test) {
 
         i18n: {
 
-            getDefaultLang: function () {
+            getDefaultLanguage: function () {
                 return 'en';
             },
 
-            langs: ['it', 'es', 'en'],
+            languages: ['it', 'es', 'en'],
 
             // Avoid to persist language between tests!
-            persistLang: false
+            persistLanguage: false
 
         }
     });
 
-    test.equal(i18nconf.getDefaultLang(), 'en', 'I18NConf default language is not "en" after setting getDefaultLang method.')
+    test.equal(i18nconf.getDefaultLanguage(), 'en', 'I18NConf default language is not "en" after setting getDefaultLang method.')
 
 });
 
@@ -92,21 +92,21 @@ Tinytest.add('i18n-conf - test getBestMatchingLang', function (test) {
 
     i18nconf.configure({
 
-        defaultLang: 'en',
+        defaultLanguage: 'en',
 
-        langs: ['it', 'es', 'en', 'es-ch']
+        languages: ['it', 'es', 'en', 'es-ch']
 
     });
 
-    test.equal(i18nconf.getBestMatchingLang('es-AR'), 'es');
+    test.equal(i18nconf.getBestMatchingLanguage('es-AR'), 'es');
 
-    test.equal(i18nconf.getBestMatchingLang('es_AR'), 'es');
+    test.equal(i18nconf.getBestMatchingLanguage('es_AR'), 'es');
 
-    test.equal(i18nconf.getBestMatchingLang('ES_AR'), 'es');
+    test.equal(i18nconf.getBestMatchingLanguage('ES_AR'), 'es');
 
-    test.equal(i18nconf.getBestMatchingLang('ES-CH', true), 'es-ch');
+    test.equal(i18nconf.getBestMatchingLanguage('ES-CH'), 'es-ch');
 
-    test.equal(i18nconf.getBestMatchingLang('it'), 'it');
+    test.equal(i18nconf.getBestMatchingLanguage('it'), 'it');
 
 });
 
@@ -116,16 +116,16 @@ Tinytest.add('i18n-conf - test isLangSupported', function (test) {
 
     i18nconf.configure({
 
-        defaultLang: 'en',
+        defaultLanguage: 'en',
 
-        langs: ['it', 'es', 'en', 'es-ar']
+        languages: ['it', 'es', 'en', 'es-ar']
 
     });
 
-    test.isTrue(i18nconf.isLangSupported('es-AR'));
-    test.isTrue(i18nconf.isLangSupported('it'));
-    test.isFalse(i18nconf.isLangSupported('de'));
-    test.isFalse(i18nconf.isLangSupported('es-ch', true));
+    test.isTrue(i18nconf.isLanguageSupported('es-AR'));
+    test.isTrue(i18nconf.isLanguageSupported('it'));
+    test.isFalse(i18nconf.isLanguageSupported('de'));
+    test.isFalse(i18nconf.isLanguageSupported('es-ch', true));
 
 
 });
@@ -136,15 +136,15 @@ Tinytest.add('i18n-conf - test isLangSet', function (test) {
 
     i18nconf.configure({
 
-        defaultLang: 'en',
+        defaultLanguage: 'en',
 
-        langs: ['it', 'es', 'en', 'es-ar']
+        languages: ['it', 'es', 'en', 'es-ar']
 
     });
 
-    test.isFalse(i18nconf.isLangSet());
-    i18nconf.setLang('it');
-    test.isTrue(i18nconf.isLangSet());
+    test.isFalse(i18nconf.isLanguageSet);
+    i18nconf.setLanguage('it');
+    test.isTrue(i18nconf.isLanguageSet);
 
 
 
@@ -156,9 +156,9 @@ Tinytest.add('i18n-conf - test onLangChange', function (test) {
 
     i18nconf.configure({
 
-        defaultLang: 'en',
+        defaultLanguage: 'en',
 
-        langs: ['it', 'es', 'en', 'es-ar']
+        languages: ['it', 'es', 'en', 'es-ar']
 
     });
 
@@ -172,23 +172,23 @@ Tinytest.add('i18n-conf - test onLangChange', function (test) {
         counter = 0;
     };
 
-    i18nconf.onLangChange(function (oldLang, newLang) {
+    i18nconf.onLanguageChange(function (oldLang, newLang) {
         oldLangVar = oldLang;
         newLangVar = newLang;
     });
 
-    i18nconf.onLangChange(function(oldLang, newLang) {
+    i18nconf.onLanguageChange(function(oldLang, newLang) {
         counter++;
     });
 
-    i18nconf.setLang('it');
+    i18nconf.setLanguage('it');
 
     test.equal(oldLangVar, null);
     test.equal(newLangVar, 'it');
     test.equal(counter, 1);
 
 
-    i18nconf.setLang('es');
+    i18nconf.setLanguage('es');
 
     test.equal(oldLangVar, 'it');
     test.equal(newLangVar, 'es');

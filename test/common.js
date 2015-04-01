@@ -10,11 +10,11 @@ defaultConf = function (conf) {
 
         serverSide: true,
 
-        defaultLang: 'de',
+        defaultLanguage: 'de',
 
-        langs: ['it', 'es', 'en'],
+        languages: ['it', 'es', 'en'],
 
-        persistLang: false
+        persistLanguage: false
 
     });
 
