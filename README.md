@@ -78,8 +78,13 @@ Here below a very basic example configuring the system for three languages:
 
 Just set the language.
 
-```I18NConf.setLanguage('es')```
+```javascript
 
+I18NConf.setLanguage('es')
+
+```
+
+Or use other utility methods.
 
 
 ### Configuration options
