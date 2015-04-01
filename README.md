@@ -66,14 +66,20 @@ Here below a very basic example configuring the system for three languages:
  
      });
 
+    I18NConf.onLanguageChange(function(oldLang, newLang) {
+        // Do something interesting for my app or my package
+    });
+
      
 ```
 
 
 ### Basic usage
 
+Just set the language.
+
 ```I18NConf.setLanguage('es')```
-```I18NConf.getLanguage()```
+
 
 
 ### Configuration options
