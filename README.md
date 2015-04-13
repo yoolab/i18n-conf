@@ -7,22 +7,22 @@ achieve common tasks like configuring supported languages, autoconfigure languag
 
 # About
 
-Will be used in future versions of [Iron Router i18n](https://atmospherejs.com/martino/iron-router-i18n).
+Will be used in future versions of [Iron Router i18n](https://atmospherejs.com/martino/iron-router-i18n). 
 See [this issue](https://github.com/yoolab/iron-router-i18n/issues/46) for the reason I'm creating this package.
 
 
 ## History
 
-**Latest Version:** unreleased (install lastest master if you want to try it)
+**Latest Version:** 0.2.0
 
-See the [History.md](https://github.com/yoolab/i18n-conf/blob/master/History.md) file for changes (including breaking changes) across
-versions.
+See the [History.md](https://github.com/yoolab/i18n-conf/blob/master/History.md) file for changes (including breaking 
+changes) across versions.
 
 ### Features:
 
 * Allow to centrally store and change common i18n configuration useful for several i18n packages. 
-* i18n system agnostic. It can be easily integrated with any existing i18n package (or at least it aims to) through
-the ```I18NConf.onLanguageChange(cb)``` hook.
+* It can be easily integrated with any existing i18n package or functionality (or at least it aims to) through
+the ```I18NConf.onLanguageChange(cb)``` and ```I18NConf.onConfigure(cb)``` methods.
 * Language autoconfiguration mechanism.
 * Persist language between requests
 * Several tweaking and configuration options
@@ -68,7 +68,12 @@ Here below a very basic example configuring the system for three languages:
      });
 
     I18NConf.onLanguageChange(function(oldLang, newLang) {
-        // Do something interesting for my app or my package
+        // Do something interesting for my app or my package each time the language change
+    });
+    
+    I18NConf.onConfigure(function(options) {
+            // Do something interesting for my app or my package each time I18NConf is configured
+            // can be used to configure other i18n package from I18NConf configuration
     });
 
      
@@ -135,9 +140,36 @@ value or a function returning an integer value.
 
 ### Methods
 
+
+#### I18NConf.onConfigure(cb)
+
+Main method used to integrate I18N Conf with other i18n packages. The method callbacks added through this method will be 
+called whenever ```I18NConf.configure(options)``` is called ginvig the opportunity to configure other i18n packages.
+The callback function is passed all the I18NConf options configured at the moment.
+
+```javascript
+
+// Package A integration
+I18NConf.onConfigure(function(options) {
+    // configure i18n package A
+});
+
+// Package B integration
+I18NConf.onConfigure(function(options) {
+   // configure i18n package B
+});
+
+// Whatever
+I18NConf.onConfigure(function(options) {
+   // do whatever
+});
+
+
+```
+
 #### I18NConf.onLanguageChange(cb)
 
-Main method used to integrate I18N COnf with other i18n packages. The method callback added through this method
+Method used to integrate I18N Conf with other i18n packages. The method callback added through this method
 will be called whenever ```I18NConf.setLanguage(lang)``` is changed and the language is actually changed.
 The callback function is passed two values: the old language and the new language:
 
@@ -160,6 +192,7 @@ I18NConf.onLanguageChange(function(oldLang, newLang) {
 
 
 ```
+
 
 #### I18NConf.setLanguage(lang)
 

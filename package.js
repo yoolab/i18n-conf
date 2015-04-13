@@ -2,7 +2,7 @@ Package.describe({
     summary: 'i18n configuration package',
     git: "https://github.com/yoolab/i18n-conf.git",
     name: "martino:i18n-conf",
-    version: '0.1.0'
+    version: '0.2.0'
 });
 
 Package.onUse(function (api) {
