@@ -1,5 +1,3 @@
-Npm.depends({locale: "0.0.20"});
-
 Package.describe({
     summary: 'i18n configuration package',
     git: "https://github.com/yoolab/i18n-conf.git",

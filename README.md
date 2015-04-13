@@ -2,13 +2,14 @@
 
 i18n configuration package for [meteorjs](https://www.meteor.com/). 
 
-This package just provide basic support
-for i18 configuration, it is meant to be used bu other i18n package in order to achieve common tasks like
-configuring supported languages, autoconfigure language etc.
+This package just provide basic support for i18 configuration, it is meant to be used bu other i18n package in order to 
+achieve common tasks like configuring supported languages, autoconfigure language etc.
 
 # About
 
+Will be used in future versions of [Iron Router i18n](https://atmospherejs.com/martino/iron-router-i18n).
 See [this issue](https://github.com/yoolab/iron-router-i18n/issues/46) for the reason I'm creating this package.
+
 
 ## History
 
