@@ -29,6 +29,11 @@ the ```I18NConf.onLanguageChange(cb)``` and ```I18NConf.onConfigure(cb)``` metho
 * Provides some 18n utility methods to guess best matching language, get navigator language etc.
 
 
+## Packages using i18n-conf as a configuration mechanism
+
+* [Iron Router i18n](https://atmospherejs.com/martino/iron-router-i18n)
+
+
 ### TODO:
 
 * Integrate with user accounts: give the possibility to change current language on login based on user language
@@ -232,18 +237,6 @@ Returns the navigator language.
 #### I18NConf.getNavigatorLanguages() [Just client side]
 
 Returns all the navigator supported languages.
-
-
-### Helpers
-
-#### currentLang
-
-Overrides iron:router pathFor helper making it reactive on router language change and adds the "lang" parameter 
-to force language for path. 
-
-E.g.
-
-```{{currentLang}}```
 
 
 ## License
