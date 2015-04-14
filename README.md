@@ -31,7 +31,7 @@ the ```I18NConf.onLanguageChange(cb)``` and ```I18NConf.onConfigure(cb)``` metho
 
 ## Packages using i18n-conf as a configuration mechanism
 
-* [Iron Router i18n](https://atmospherejs.com/martino/iron-router-i18n)
+* [Iron Router i18n](https://atmospherejs.com/martino/iron-router-i18n) (since verion 0.5.5)
 
 
 ### TODO:
