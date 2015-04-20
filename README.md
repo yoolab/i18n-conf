@@ -7,13 +7,15 @@ achieve common tasks like configuring supported languages, autoconfigure languag
 
 # About
 
-Will be used in future versions of [Iron Router i18n](https://atmospherejs.com/martino/iron-router-i18n). 
-See [this issue](https://github.com/yoolab/iron-router-i18n/issues/46) for the reason I'm creating this package.
+This package was created to avoid repeating some common tasks for i18n packages, provide common i18n functionalities and a central configuratio/management point for i18n (supported languages configuration, setting/getting current language etc.)
+
+It was created to  [Iron Router i18n](https://atmospherejs.com/martino/iron-router-i18n). 
+See also [this issue](https://github.com/yoolab/iron-router-i18n/issues/46).
 
 
 ## History
 
-**Latest Version:** 0.2.0
+**Latest Version:** 0.2.1
 
 See the [History.md](https://github.com/yoolab/i18n-conf/blob/master/History.md) file for changes (including breaking 
 changes) across versions.
