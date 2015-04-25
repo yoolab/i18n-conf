@@ -2,33 +2,30 @@
 
 i18n configuration package for [meteorjs](https://www.meteor.com/). 
 
-This package just provide basic support for i18 configuration, it is meant to be used bu other i18n package in order to 
-achieve common tasks like configuring supported languages, autoconfigure language etc.
+This package just provide basic support for i18 configuration, it is meant to be used bu other i18n package in order to achieve common tasks like configuring supported languages, autoconfigure language etc.
 
 # About
 
-This package was created to avoid repeating some common tasks for i18n packages, provide common i18n functionalities and a central configuratio/management point for i18n (supported languages configuration, setting/getting current language etc.)
+This package was created to avoid repeating some common tasks for i18n packages, provides common i18n functionalities and a central configuration/management point for i18n (supported languages configuration, setting/getting current language etc.)
 
-It was created to  [Iron Router i18n](https://atmospherejs.com/martino/iron-router-i18n). 
-See also [this issue](https://github.com/yoolab/iron-router-i18n/issues/46).
+It was created to support [Iron Router i18n](https://atmospherejs.com/martino/iron-router-i18n). See also [this issue](https://github.com/yoolab/iron-router-i18n/issues/46).
 
 
 ## History
 
-**Latest Version:** 0.2.1
+**Latest Version:** 0.2.2
 
-See the [History.md](https://github.com/yoolab/i18n-conf/blob/master/History.md) file for changes (including breaking 
-changes) across versions.
+See the [History.md](https://github.com/yoolab/i18n-conf/blob/master/History.md) file for changes (including breaking changes) across versions.
 
 ### Features:
 
 * Allow to centrally store and change common i18n configuration useful for several i18n packages. 
-* It can be easily integrated with any existing i18n package or functionality (or at least it aims to) through
-the ```I18NConf.onLanguageChange(cb)``` and ```I18NConf.onConfigure(cb)``` methods.
+* It can be easily integrated with any existing i18n package or functionality (or at least it aims to) through the ```I18NConf.onLanguageChange(cb)``` and ```I18NConf.onConfigure(cb)``` methods.
 * Language autoconfiguration mechanism.
 * Persist language between requests
 * Several tweaking and configuration options
 * Provides some 18n utility methods to guess best matching language, get navigator language etc.
+* Automatically change html lang attribute to current lang
 
 
 ## Packages using i18n-conf as a configuration mechanism
@@ -36,17 +33,7 @@ the ```I18NConf.onLanguageChange(cb)``` and ```I18NConf.onConfigure(cb)``` metho
 * [Iron Router i18n](https://atmospherejs.com/martino/iron-router-i18n) (since version 0.5.5)
 
 
-### TODO:
-
-* Integrate with user accounts: give the possibility to change current language on login based on user language
-with an ```I18NConf.onUserLanguage(cb)``` hook.
-
-
-
 ##  Installation
-
-Install latest master by copying it's content into a directory called ```packages/martino:i18n-conf```
-and execute:
 
 ``` sh
 $ meteor add martino:i18n-conf
@@ -77,6 +64,14 @@ Here below a very basic example configuring the system for three languages:
     I18NConf.onLanguageChange(function(oldLang, newLang) {
         // Do something interesting for my app or my package each time the language change
     });
+    
+    ...
+       
+    I18NConf.onLanguageChange(function(oldLang, newLang) {
+               // Do something else interesting for my app or my package each time the language change
+    });
+    
+    ...
     
     I18NConf.onConfigure(function(options) {
             // Do something interesting for my app or my package each time I18NConf is configured
@@ -133,15 +128,11 @@ Enable (true) or disable (false) server side functionality (default: true).
 
 #### persistLanguage(lang)
 
-Can be used client and server side to persist the chosen language between requests. Default implementation (just client side)
-uses a cookie to store the selected language. Any implementation should use ```lang``` parameter to set the language and always 
-return the currently stored language whether called with or without a parameter. Just set to ```false``` if you want to disable
-language persistance between requests.
+Can be used client and server side to persist the chosen language between requests. Default implementation (just client side) uses a cookie to store the selected language. Any implementation should use ```lang``` parameter to set the language and always return the currently stored language whether called with or without a parameter. Just set to ```false``` if you want to disable language persistence between requests.
 
 #### persistCookieExpiration
 
-The value in microseconds of the cookie expiration date set by default implementation of ```persistLanguage```. Can be an integer
-value or a function returning an integer value.
+The value in microseconds of the cookie expiration date set by default implementation of ```persistLanguage```. Can be an integer value or a function returning an integer value.
 
 
 
@@ -150,8 +141,7 @@ value or a function returning an integer value.
 
 #### I18NConf.onConfigure(cb)
 
-Main method used to integrate I18N Conf with other i18n packages. The method callbacks added through this method will be 
-called whenever ```I18NConf.configure(options)``` is called ginvig the opportunity to configure other i18n packages.
+Main method used to integrate I18N Conf with other i18n packages. The method callbacks added through this method will be called whenever ```I18NConf.configure(options)``` is called ginvig the opportunity to configure other i18n packages.
 The callback function is passed all the I18NConf options configured at the moment.
 
 ```javascript
@@ -176,8 +166,7 @@ I18NConf.onConfigure(function(options) {
 
 #### I18NConf.onLanguageChange(cb)
 
-Method used to integrate I18N Conf with other i18n packages. The method callback added through this method
-will be called whenever ```I18NConf.setLanguage(lang)``` is changed and the language is actually changed.
+Method used to integrate I18N Conf with other i18n packages. The method callback added through this method will be called whenever ```I18NConf.setLanguage(lang)``` is changed and the language is actually changed.
 The callback function is passed two values: the old language and the new language:
 
 ```javascript
@@ -215,13 +204,11 @@ Gets the default language for the app (see `defaultLanguage` property and `getDe
 
 #### I18NConf.isLanguageSet
 
-Is true if the language was explicitly set (i.e. if ```setLanguage```method was called at least once). Can be useful
-to know whether ```getLanguage``` is just returning the default language or a language explicitly set.
+Is true if the language was explicitly set (i.e. if ```setLanguage```method was called at least once). Can be useful to know whether ```getLanguage``` is just returning the default language or a language explicitly set.
 
 #### I18NConf.isLanguageSupported(lang, exactMatch)
 
-Returns true is the language is supported by the application, if the second argument is present and true it will search
-for an exact match (e.g. with second argument set to true "es-ar" will NOT be supported if "es" is supported).
+Returns true is the language is supported by the application, if the second argument is present and true it will search for an exact match (e.g. with second argument set to true "es-ar" will NOT be supported if "es" is supported).
 
 #### I18NConf.getBestMatchingLanguage(lang)
 
@@ -229,8 +216,7 @@ Returns the language best matching the passed language. It returns the default l
 
 #### I18NConf.normalizeLanguage(lang)
 
-Returns a lowercase dash separated version of (useful to convert from some other formats using underscore as a separator
-and/or uppercase country codes.
+Returns a lowercase dash separated version of (useful to convert from some other formats using underscore as a separator and/or uppercase country codes.
 
 #### I18NConf.getNavigatorLanguage() [Just client side]
 

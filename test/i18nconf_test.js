@@ -183,7 +183,7 @@ Tinytest.add('i18n-conf - test onLangChange', function (test) {
 
     i18nconf.setLanguage('it');
 
-    test.equal(oldLangVar, null);
+    test.equal(oldLangVar, undefined);
     test.equal(newLangVar, 'it');
     test.equal(counter, 1);
 
