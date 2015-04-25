@@ -142,9 +142,9 @@ Tinytest.add('i18n-conf - test isLangSet', function (test) {
 
     });
 
-    test.isFalse(i18nconf.isLanguageSet);
+    test.isFalse(i18nconf.isLanguageSet());
     i18nconf.setLanguage('it');
-    test.isTrue(i18nconf.isLanguageSet);
+    test.isTrue(i18nconf.isLanguageSet());
 
 
 
@@ -160,6 +160,51 @@ Tinytest.add('i18n-conf - test onLangChange', function (test) {
 
         languages: ['it', 'es', 'en', 'es-ar']
 
+    });
+
+    var oldLangVar = 'xx';
+    var newLangVar = 'xx';
+    var counter = 0;
+
+    reset = function () {
+        oldLangVar = null;
+        newLangVar = null;
+        counter = 0;
+    };
+
+    i18nconf.onLanguageChange(function (oldLang, newLang) {
+        oldLangVar = oldLang;
+        newLangVar = newLang;
+    });
+
+    i18nconf.onLanguageChange(function(oldLang, newLang) {
+        counter++;
+    });
+
+    i18nconf.setLanguage('it');
+
+    test.equal(oldLangVar, undefined);
+    test.equal(newLangVar, 'it');
+    test.equal(counter, 1);
+
+
+    i18nconf.setLanguage('es');
+
+    test.equal(oldLangVar, 'it');
+    test.equal(newLangVar, 'es');
+    test.equal(counter, 2);
+
+
+});
+
+Tinytest.add('i18n-conf - test persistLanguage', function (test) {
+
+    var i18nconf = initConf();
+
+    defaultConf(i18nconf);
+
+    i18nconf.configure({
+       persistLanguage: true
     });
 
     var oldLangVar = 'xx';
