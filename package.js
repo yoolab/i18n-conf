@@ -30,6 +30,7 @@ Package.onTest(function (api) {
 
     api.addFiles('test/common.js', ['client', 'server']);
     api.addFiles('test/i18nconf_test.js', ['client', 'server']);
+    api.addFiles('test/i18nconf_test_client.js', ['client']);
 
 
 });

@@ -189,17 +189,3 @@ Tinytest.add('i18n-conf - test onLangChange', function (test) {
 
 });
 
-Tinytest.add('i18n-conf - test persistLanguage', function (test) {
-
-    var i18nconf = initConf();
-
-    defaultConf(i18nconf);
-
-    i18nconf.configure({
-       persistLanguage: true
-    });
-
-
-
-
-});
