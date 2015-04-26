@@ -12,6 +12,9 @@ Package.onUse(function (api) {
     api.use('tracker@1.0.5', ['client', 'server']);
     api.use('underscore@1.0.2', ['client', 'server']);
 
+    // for helpers
+    api.use('blaze', 'client');
+
     api.addFiles('lib/i18nconf.js', ['client', 'server']);
     api.addFiles('lib/i18nconf_client.js', ['client']);
     api.addFiles('lib/i18nconf_init.js', ['client', 'server']);

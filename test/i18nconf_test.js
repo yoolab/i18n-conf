@@ -189,3 +189,48 @@ Tinytest.add('i18n-conf - test onLangChange', function (test) {
 
 });
 
+Tinytest.add('i18n-conf - test languageDepend', function (test) {
+
+    var i18nconf = initConf();
+    defaultConf(i18nconf);
+
+    var reactive = false;
+
+    Tracker.autorun(function () {
+        I18NConf.languageDep.depend();
+        reactive = true;
+    });
+
+    I18NConf.setLanguage('it');
+    Tracker.flush();
+    test.isTrue(reactive, true);
+
+});
+
+Tinytest.add('i18n-conf - test getLanguage reactivity', function (test) {
+
+    var i18nconf = initConf();
+    defaultConf(i18nconf);
+
+    // Test helper
+    test.equal(i18nconf.getLanguage(), 'en', 'Current language is not en as configured.');
+
+    var runCount = 0;
+
+    // Test helper reactivity
+    Tracker.autorun(function () {
+
+        var lang = i18nconf.getLanguage();
+
+        if (!Tracker.currentComputation.firstRun) {
+            runCount++;
+            test.equal(lang, 'it', 'Current language is not it as configured.');
+        }
+    });
+
+    i18nconf.setLanguage('it');
+    Tracker.flush();
+    test.equal(runCount, 1);
+
+});
+

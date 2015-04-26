@@ -11,7 +11,7 @@ defaultConf = function (conf) {
 
         serverSide: true,
 
-        defaultLanguage: 'de',
+        defaultLanguage: 'en',
 
         languages: ['it', 'es', 'en'],
 
