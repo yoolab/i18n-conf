@@ -2,18 +2,18 @@
 
 i18n configuration package for [meteorjs](https://www.meteor.com/). 
 
-This package just provide basic support for i18 configuration, it is meant to be used bu other i18n package in order to achieve common tasks like configuring supported languages, autoconfigure language etc.
+This package just provide basic support for i18 configuration, it is meant to be used by other i18n package in order to achieve common tasks like configuring supported languages, autoconfigure language etc.
 
 # About
 
 This package was created to avoid repeating some common tasks for i18n packages, provides common i18n functionalities and a central configuration/management point for i18n (supported languages configuration, setting/getting current language etc.)
 
-It was created to support [Iron Router i18n](https://atmospherejs.com/martino/iron-router-i18n). See also [this issue](https://github.com/yoolab/iron-router-i18n/issues/46).
+It was originally created to support [Iron Router i18n](https://atmospherejs.com/martino/iron-router-i18n). See also [this issue](https://github.com/yoolab/iron-router-i18n/issues/46).
 
 
 ## History
 
-**Latest Version:** 0.2.2
+**Latest Version:** 0.3.0
 
 See the [History.md](https://github.com/yoolab/i18n-conf/blob/master/History.md) file for changes (including breaking changes) across versions.
 
@@ -81,6 +81,8 @@ Here below a very basic example configuring the system for three languages:
      
 ```
 
+Most of the time you will just need to use basic features/methods, default configuration options will provide most of functionality.
+
 
 ### Basic usage
 
@@ -126,14 +128,31 @@ If set to true I18N Conf will try to autodetect the best language to use for cur
 
 Enable (true) or disable (false) server side functionality (default: true).
 
-#### persistLanguage(lang)
+#### persistLanguage
 
-Can be used client and server side to persist the chosen language between requests. Default implementation (just client side) uses a cookie to store the selected language. Any implementation should use ```lang``` parameter to set the language and always return the currently stored language whether called with or without a parameter. Just set to ```false``` if you want to disable language persistence between requests.
+Whether or not to persist the language when selecting it with ```I18NConf.setLanguage(lang)```. Default true.
+
 
 #### persistCookieExpiration
 
 The value in microseconds of the cookie expiration date set by default implementation of ```persistLanguage```. Can be an integer value or a function returning an integer value.
 
+#### persistCookieName
+
+The name of the cookie used to persist the language (default ```'martino:i18n-conf:lang'```)
+
+#### getPersistedLanguage
+
+Function defining how to retrieve the persisted language (default retrieve the value of a cookie)
+
+#### setPersistedLanguage(lang)
+
+Function defining how to set the persisted language (default sets the value of a cookie)
+
+
+#### removePersistedLanguage
+
+Function defining how to remove the currently persisted language (default reset the value of the cookie).
 
 
 ### Methods
@@ -192,7 +211,7 @@ I18NConf.onLanguageChange(function(oldLang, newLang) {
 
 #### I18NConf.setLanguage(lang)
 
-Programmatically change the application language.
+Change the current language.
 
 #### I18NConf.getLanguage()
 
@@ -202,9 +221,25 @@ Retrieves the current language.
 
 Gets the default language for the app (see `defaultLanguage` property and `getDefaultLanguage` hook)
 
-#### I18NConf.isLanguageSet
+#### I18NConf.isLanguageSet()
 
-Is true if the language was explicitly set (i.e. if ```setLanguage```method was called at least once). Can be useful to know whether ```getLanguage``` is just returning the default language or a language explicitly set.
+Returns true when the language was explicitly set that is if ```setLanguage```method was called at least once or the language was previously persisted (in case language persistence is enabled). Can be useful to know whether ```getLanguage``` is just returning the default language or a language explicitly set.
+
+#### I18NConf.getPersistedLanguage()
+
+Return the currently persisted language (or ```null``` if no language is persisted)
+
+#### I18NConf.setPersistedLanguage(lang)
+
+Set the currently persisted language.
+
+#### I18NConf.removePersistedLanguage()
+
+Remove the currently persisted language.
+
+#### I18NConf.reset()
+
+Reset I18NConf configuration to its default configuration: includes removing persisted language and onLanguageChange/onConfigure hooks.
 
 #### I18NConf.isLanguageSupported(lang, exactMatch)
 
