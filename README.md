@@ -13,7 +13,7 @@ It was originally created to support [Iron Router i18n](https://atmospherejs.com
 
 ## History
 
-**Latest Version:** 0.3.0
+**Latest Version:** 0.3.1
 
 See the [History.md](https://github.com/yoolab/i18n-conf/blob/master/History.md) file for changes (including breaking changes) across versions.
 
@@ -237,9 +237,9 @@ Set the currently persisted language.
 
 Remove the currently persisted language.
 
-#### I18NConf.reset()
+#### I18NConf.reset(full)
 
-Reset I18NConf configuration to its default configuration: includes removing persisted language and onLanguageChange/onConfigure hooks.
+Reset I18NConf configuration to its default configuration. By passing ```true``` as argument will also remove persisted language and onLanguageChange/onConfigure hooks (use with caution with this option as it may break other package hooks).
 
 #### I18NConf.isLanguageSupported(lang, exactMatch)
 
@@ -260,6 +260,13 @@ Returns the navigator language.
 #### I18NConf.getNavigatorLanguages() [Just client side]
 
 Returns all the navigator supported languages.
+
+
+### Helpers
+
+#### currentLang
+
+```{{currentLang}}``` will return the current language (reactive)
 
 
 ## License
