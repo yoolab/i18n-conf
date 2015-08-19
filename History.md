@@ -1,3 +1,7 @@
+## 0.3.2
+
+* Anticipated language autoconfiguration to the initial configuration step (was in a startup clause).
+
 ## 0.3.1
 
 * **NEW FEATURE** added ```{{currentLang}}``` reactive helper

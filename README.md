@@ -13,7 +13,7 @@ It was originally created to support [Iron Router i18n](https://atmospherejs.com
 
 ## History
 
-**Latest Version:** 0.3.1
+**Latest Version:** 0.3.2
 
 See the [History.md](https://github.com/yoolab/i18n-conf/blob/master/History.md) file for changes (including breaking changes) across versions.
 
