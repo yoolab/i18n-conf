@@ -15,7 +15,9 @@ defaultConf = function (conf) {
 
         languages: ['it', 'es', 'en'],
 
-        persistLanguage: false
+        persistLanguage: false,
+
+        autoConfLanguage: false
 
     });
 

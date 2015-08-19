@@ -22,7 +22,6 @@ Tinytest.add('i18n-conf - test I18NConf configuration', function (test) {
     test.equal(i18nconf.options.languages[2], 'en', 'Third language for client is not "en".');
 
     // Test default options
-    test.isTrue(i18nconf.options.autoConfLanguage, 'Default value for autoCofLanguage option is not "true" .');
     test.isTrue(i18nconf.options.serverSide, 'Default value for serverSide option is not "true" .');
 
 });
@@ -40,7 +39,11 @@ Tinytest.add('i18n-conf - test I18NConf language methods', function (test) {
 
         defaultLanguage: 'es',
 
-        languages: ['it', 'es', 'en']
+        languages: ['it', 'es', 'en'],
+
+        autoConfLanguage: false,
+
+        persistLanguage: false
 
     });
 
@@ -69,7 +72,10 @@ Tinytest.add('i18n-conf - test I18NConf language methods', function (test) {
             languages: ['it', 'es', 'en'],
 
             // Avoid to persist language between tests!
-            persistLanguage: false
+            persistLanguage: false,
+
+            autoConfLanguage: false
+
 
         }
     });
@@ -130,7 +136,9 @@ Tinytest.add('i18n-conf - test isLangSet', function (test) {
 
         defaultLanguage: 'en',
 
-        languages: ['it', 'es', 'en', 'es-ar']
+        languages: ['it', 'es', 'en', 'es-ar'],
+
+        autoConfLanguage: false
 
     });
 
@@ -150,7 +158,9 @@ Tinytest.add('i18n-conf - test onLangChange', function (test) {
 
         defaultLanguage: 'en',
 
-        languages: ['it', 'es', 'en', 'es-ar']
+        languages: ['it', 'es', 'en', 'es-ar'],
+
+        autoConfLanguage: false
 
     });
 
@@ -211,6 +221,7 @@ Tinytest.add('i18n-conf - test getLanguage reactivity', function (test) {
 
     var i18nconf = initConf();
     defaultConf(i18nconf);
+
 
     // Test helper
     test.equal(i18nconf.getLanguage(), 'en', 'Current language is not en as configured.');

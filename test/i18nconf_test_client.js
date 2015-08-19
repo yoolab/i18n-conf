@@ -20,7 +20,8 @@ Tinytest.add('i18n-conf - test persistLanguage', function (test) {
     defaultConf(i18nconf);
 
     i18nconf.configure({
-        persistLanguage: true
+        persistLanguage: true,
+        autoConfLanguage: false
     });
 
     i18nconf.setPersistedLanguage('es');
