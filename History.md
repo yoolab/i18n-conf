@@ -1,3 +1,11 @@
+## 0.3.3
+
+* Reverted 0.3.2 change: browser language autoconfiguration should happen before rendering but after any possible 
+language change listener is set!
+* Execute configure on initialization just if we pass options in the constructor (that is don't call "configure" until
+ we really configure).
+
+
 ## 0.3.2
 
 * Anticipated language autoconfiguration to the initial configuration step (was in a startup clause).
