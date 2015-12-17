@@ -1,3 +1,8 @@
+## 0.3.4
+
+* Improved language persistence mechanism
+* Do not emit warning for changing language to current language if current language was not explicitly set 
+
 ## 0.3.3
 
 * Reverted 0.3.2 change: browser language autoconfiguration should happen before rendering but after any possible 
