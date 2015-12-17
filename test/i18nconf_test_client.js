@@ -26,8 +26,6 @@ Tinytest.add('i18n-conf - test persistLanguage', function (test) {
 
     i18nconf.setPersistedLanguage('es');
     test.equal(i18nconf.getPersistedLanguage(), 'es');
-    test.isTrue(i18nconf.isLanguageSet());
-
 
     i18nconf.setLanguage('it');
     test.equal(i18nconf.getPersistedLanguage(), 'it');
